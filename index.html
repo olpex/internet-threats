@@ -8,8 +8,10 @@
     <title>Загрози в інтернеті: віруси, фішинг, шкідливі програми</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="modern-effects.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="modern-interactions.js" defer></script>
 </head>
 <body>
     <div id="reading-progress-container">
@@ -47,10 +49,10 @@
 
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Захистіть себе від загроз в інтернеті</h1>
-                <p>Дізнайтеся про найпоширеніші кіберзагрози та як захистити себе від них</p>
-                <a href="#viruses" class="btn">Дізнатися більше</a>
+            <div class="hero-content animate-on-scroll">
+                <h1 class="gradient-text typing-effect">Захистіть себе від загроз в інтернеті</h1>
+                <p class="animate-on-scroll fade-in-up">Дізнайтеся про найпоширеніші кіберзагрози та як захистити себе від них</p>
+                <a href="#viruses" class="btn btn-shimmer scale-on-hover animate-on-scroll">Дізнатися більше</a>
             </div>
         </div>
     </section>
@@ -62,15 +64,24 @@
                 <p>Шкідливі програми, які можуть розмножуватися та поширюватися між комп'ютерами</p>
             </div>
             <div class="cards">
-                <div class="card">
+                <div class="card glass-effect card-hover-effect animate-on-scroll">
+                    <div class="card-icon pulse-icon">
+                        <i class="fas fa-virus"></i>
+                    </div>
                     <h3>Комп'ютерні віруси</h3>
                     <p>Шкідливі програми, які можуть самостійно копіюватися і поширюватися з одного комп'ютера на інший, пошкоджуючи файли та викрадаючи дані.</p>
                 </div>
-                <div class="card">
+                <div class="card glass-effect card-hover-effect animate-on-scroll">
+                    <div class="card-icon pulse-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
                     <h3>Ознаки зараження</h3>
                     <p>Сповільнення роботи комп'ютера, помилки, зникнення файлів, несподівані перезавантаження та дивна поведінка програм - основні індикатори вірусної активності.</p>
                 </div>
-                <div class="card">
+                <div class="card glass-effect card-hover-effect animate-on-scroll">
+                    <div class="card-icon pulse-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                     <h3>Методи захисту</h3>
                     <p>Використання антивірусного ПЗ, регулярні оновлення системи, обережність з електронними листами та завантаженнями - ключові елементи захисту від вірусів.</p>
                 </div>
@@ -130,16 +141,22 @@
 
     <section id="malware" class="section">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-on-scroll">
                 <h2>Шкідливі програми</h2>
                 <p>Різні типи програмного забезпечення, створеного для пошкодження або несанкціонованого доступу</p>
             </div>
             <div class="cards">
-                <div class="card">
+                <div class="card glass-effect card-hover-effect animate-on-scroll">
+                    <div class="card-icon pulse-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
                     <h3>Типи шкідливих програм</h3>
                     <p>Віруси, трояни, шпигунське ПЗ, рекламне ПЗ, програми-вимагачі та руткіти - основні категорії шкідливого програмного забезпечення з різними механізмами дії.</p>
                 </div>
-                <div class="card">
+                <div class="card glass-effect card-hover-effect animate-on-scroll">
+                    <div class="card-icon pulse-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
                     <h3>Програми-вимагачі</h3>
                     <p>Шкідливе ПЗ, яке блокує доступ до системи або шифрує дані користувача, вимагаючи викуп за відновлення доступу до інформації.</p>
                     <div class="case-study">
@@ -155,7 +172,10 @@
                         <p class="case-study-details">Джерело: Звіт з кібербезпеки, 2020</p>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card glass-effect card-hover-effect animate-on-scroll">
+                    <div class="card-icon pulse-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
                     <h3>Шпигунське ПЗ</h3>
                     <p>Програми, які таємно збирають інформацію про користувача, його активність в інтернеті та особисті дані без згоди та відома власника пристрою.</p>
                     <div class="case-study">

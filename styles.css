@@ -1,22 +1,31 @@
 /* Загальні стилі */
 :root {
-    --primary-color: #4a6bff;
-    --primary-rgb: 74, 107, 255;
-    --secondary-color: #ff6b6b;
-    --secondary-rgb: 255, 107, 107;
-    --dark-color: #2d3748;
-    --light-color: #f8f9fa;
+    --primary-color: #667eea;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    --primary-rgb: 102, 126, 234;
+    --secondary-color: #f5576c;
+    --secondary-rgb: 245, 87, 108;
+    --dark-color: #1a202c;
+    --light-color: #f7fafc;
     --danger-color: #e53e3e;
     --success-color: #38a169;
     --success-rgb: 56, 161, 105;
     --warning-color: #f6ad55;
     --warning-rgb: 246, 173, 85;
     --info-color: #63b3ed;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --border-radius: 16px;
+    --border-radius-sm: 8px;
+    --border-radius-lg: 24px;
+    --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --accent-color: #6c63ff;
     --accent-color-light: #8c83ff;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
     
     /* Світла тема (за замовчуванням) */
     --bg-color: #ffffff;
@@ -133,10 +142,30 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--bg-color);
-    transition: background-color var(--transition-medium), color var(--transition-medium);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    transition: background var(--transition), color var(--transition);
     scroll-behavior: smooth;
     overflow-x: hidden;
+    position: relative;
+}
+
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(245, 87, 108, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 a {
@@ -165,31 +194,49 @@ img {
 
 .btn {
     display: inline-block;
-    padding: 12px 24px;
-    background-color: var(--primary-color);
+    padding: 16px 32px;
+    background: var(--primary-gradient);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
     text-decoration: none;
     font-weight: 600;
-    transition: all var(--transition-medium);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
     text-align: center;
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    font-size: 1rem;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.btn:hover::before {
+    left: 100%;
 }
 
 .btn:hover {
-    background-color: #3451d1;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--box-shadow-lg);
+    filter: brightness(1.1);
 }
 
 .btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--box-shadow);
 }
 
 .btn-outline {
@@ -227,20 +274,28 @@ img {
 
 /* Заголовок */
 header {
-    background-color: var(--header-bg);
-    box-shadow: var(--header-shadow);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] header {
+    background: rgba(26, 32, 44, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 20px;
 }
 
 /* Перемикач теми */
@@ -349,15 +404,19 @@ nav ul li {
 nav ul li a {
     color: var(--text-color);
     font-weight: 600;
-    padding: 8px 0;
+    padding: 12px 20px;
     position: relative;
     display: inline-block;
-    transition: all var(--transition-medium);
+    transition: var(--transition);
+    border-radius: var(--border-radius-sm);
+    backdrop-filter: blur(10px);
 }
 
 nav ul li a:hover {
     color: var(--primary-color);
     transform: translateY(-2px);
+    background: rgba(102, 126, 234, 0.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 }
 
 nav ul li a:after {
@@ -365,18 +424,23 @@ nav ul li a:after {
     position: absolute;
     width: 0;
     height: 3px;
-    background-color: var(--primary-color);
+    background: var(--primary-gradient);
     bottom: 0;
-    left: 0;
-    transition: width var(--transition-medium), opacity var(--transition-medium);
-    opacity: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width var(--transition);
     border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
 }
 
 nav ul li a:hover:after,
 nav ul li a.active:after {
-    width: 100%;
-    opacity: 1;
+    width: 80%;
+}
+
+nav ul li a.active {
+    color: var(--primary-color);
+    background: rgba(102, 126, 234, 0.1);
 }
 
 nav ul li::before {
@@ -406,32 +470,68 @@ nav ul li:hover::before {
 
 /* Герой секція */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
+                linear-gradient(45deg, rgba(245, 87, 108, 0.1), rgba(102, 126, 234, 0.1)),
+                url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     height: 100vh;
     display: flex;
     align-items: center;
     text-align: center;
     color: #fff;
     padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(245, 87, 108, 0.3) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(2deg); }
 }
 
 .hero-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
+    font-size: 4.5rem;
+    margin-bottom: 30px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ffffff, #f0f8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    opacity: 0.9;
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Секції */
@@ -451,17 +551,22 @@ nav ul li:hover::before {
 
 .section-header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     position: relative;
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: var(--dark-color);
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     position: relative;
-    padding-bottom: 15px;
-    font-weight: 700;
+    padding-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
 .section-header h2::after {
@@ -470,18 +575,21 @@ nav ul li:hover::before {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background-color: var(--primary-color);
-    border-radius: 2px;
+    width: 120px;
+    height: 6px;
+    background: var(--primary-gradient);
+    border-radius: 3px;
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 .section-header p {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: #666;
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.7;
+    font-weight: 400;
+    opacity: 0.8;
 }
 
 .section::before {
@@ -501,24 +609,27 @@ nav ul li:hover::before {
 /* Картки */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    padding: 20px 0;
 }
 
 /* Картки */
 .card {
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    padding: 30px;
+    padding: 40px;
     transition: var(--transition);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(20px);
 }
 
 .bg-light .card {
-    background-color: var(--card-bg);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .card::before {
@@ -526,15 +637,40 @@ nav ul li:hover::before {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
-    height: 0;
-    background-color: var(--primary-color);
-    transition: height var(--transition-medium);
+    width: 100%;
+    height: 4px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition);
     z-index: 1;
 }
 
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: opacity var(--transition);
+    z-index: -1;
+}
+
 .card:hover::before {
-    height: 100%;
+    transform: scaleX(1);
+}
+
+.card:hover::after {
+    opacity: 0.03;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--box-shadow-lg);
+    border-color: rgba(102, 126, 234, 0.2);
 }
 
 .card-icon {
